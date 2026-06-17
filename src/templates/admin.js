@@ -39,7 +39,7 @@ export function generateAdminPage(fileCards, previewModal, qrModal, batchToolbar
       </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
       // [JavaScript code from previous admin page - kept same for brevity]
       // ... 完整的管理页面JavaScript代码 ...
