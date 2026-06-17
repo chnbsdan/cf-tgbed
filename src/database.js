@@ -10,7 +10,6 @@ export async function initDatabase(config) {
   try {
     const db = config.database;
     
-    // 创建主表
     await db.prepare(`
       CREATE TABLE IF NOT EXISTS files (
         url TEXT PRIMARY KEY,
@@ -23,7 +22,6 @@ export async function initDatabase(config) {
       )
     `).run();
     
-    // 创建索引
     await db.prepare(`
       CREATE INDEX IF NOT EXISTS idx_files_created_at ON files(created_at DESC)
     `).run();
