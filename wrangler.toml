@@ -13,5 +13,5 @@ CHUNK_SIZE = "5242880"
 
 [[d1_databases]]
 binding = "DATABASE"
-database_name = "tg-file-db"
-database_id = "your-database-id"
+database_name = "imgbed"
+database_id = "b3afe13f-d094-4bd3-a987-58ae918128e9"
