@@ -2,23 +2,17 @@
  * 主入口文件 - Telegram文件托管平台
  */
 
-import { loadConfig, getSafeConfig, defaultConfig } from './config.js';
-import { initDatabase, getFiles, searchFiles, deleteFile, deleteFiles } from './database.js';
-import { authenticate, requireAuth, validateCredentials, createAuthToken } from './auth.js';
+import { loadConfig, getSafeConfig } from './config.js';
+import { initDatabase, getFileByUrl, getFiles, searchFiles, deleteFile, deleteFiles, getFileCount } from './database.js';
+import { authenticate, validateCredentials, createAuthToken } from './auth.js';
 import { uploadToTelegram, handleChunkedUpload } from './upload.js';
 import { handleFileRequest, getPreviewHtml, formatFileInfo } from './file.js';
 import { 
-  getCacheMaxAge, 
-  createCacheHeaders,
   getFromCache,
   saveToCache 
 } from './cache.js';
 import {
   formatSize,
-  getContentType,
-  generateFileUrl,
-  generateUploadId,
-  getClientIP,
   createErrorResponse,
   createSuccessResponse,
   generateHeadLinks,
