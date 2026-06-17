@@ -46,12 +46,39 @@ export async function uploadToTelegram(file, config) {
 
   const result = data.result;
   const messageId = result?.message_id;
-  const fileId = result?.document?.file_id ||
-                 result?.video?.file_id ||
-                 result?.audio?.file_id ||
-                 (result?.photo && result.photo[result.photo.length-1]?.file_id);
+  
+  // ============================================================
+  // ✅ 方案二：优先提取 photo，再提取 document
+  // ============================================================
+  let fileId = null;
+  
+  // 1. 优先提取 photo（图片）
+  if (result?.photo && result.photo.length > 0) {
+    fileId = result.photo[result.photo.length - 1].file_id;
+    console.log(`[Upload] Extracted photo fileId: ${fileId.substring(0, 30)}...`);
+  } 
+  // 2. 其次提取 document
+  else if (result?.document) {
+    fileId = result.document.file_id;
+    console.log(`[Upload] Extracted document fileId: ${fileId.substring(0, 30)}...`);
+  } 
+  // 3. 提取 video
+  else if (result?.video) {
+    fileId = result.video.file_id;
+    console.log(`[Upload] Extracted video fileId: ${fileId.substring(0, 30)}...`);
+  } 
+  // 4. 提取 audio
+  else if (result?.audio) {
+    fileId = result.audio.file_id;
+    console.log(`[Upload] Extracted audio fileId: ${fileId.substring(0, 30)}...`);
+  }
+  
+  // 调试日志：如果都提取不到，打印完整 result
+  if (!fileId) {
+    console.error('[Upload] Failed to extract fileId from result:', JSON.stringify(result, null, 2));
+    throw new Error('未获取到文件ID');
+  }
                  
-  if (!fileId) throw new Error('未获取到文件ID');
   if (!messageId) throw new Error('未获取到消息ID');
 
   const url = generateFileUrl(config.domain, ext);
