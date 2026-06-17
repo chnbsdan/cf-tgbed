@@ -351,6 +351,9 @@ ALTER TABLE files ADD COLUMN webp_file_name TEXT;
 
 本项目基于 MIT 许可证开源。详见 [LICENSE](LICENSE) 文件。
 
+## 鸣谢
+感谢这位[大佬](https://github.com/0-RTT/telegraph)给予的灵感！
+
 ## 🔗 相关链接
 
 - [Cloudflare Workers 文档](https://developers.cloudflare.com/workers/)
