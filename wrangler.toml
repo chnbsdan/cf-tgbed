@@ -1,0 +1,17 @@
+name = "tg-file-host"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+DOMAIN = "your-domain.com"
+USERNAME = "admin"
+PASSWORD = "your-password"
+ENABLE_AUTH = "true"
+COOKIE = "7"
+MAX_SIZE_MB = "20"
+CHUNK_SIZE = "5242880"
+
+[[d1_databases]]
+binding = "DATABASE"
+database_name = "tg-file-db"
+database_id = "your-database-id"
