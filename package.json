@@ -1,0 +1,27 @@
+{
+  "name": "tg-file-host",
+  "version": "2.0.0",
+  "description": "Telegram文件托管平台 - Cloudflare Workers",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.js"
+  },
+  "keywords": [
+    "telegram",
+    "file-host",
+    "cloudflare-workers",
+    "image-hosting"
+  ],
+  "author": "Chnbsdan",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "vitest": "^1.1.0",
+    "wrangler": "^3.22.0"
+  }
+}
