@@ -4,7 +4,7 @@ compatibility_date = "2024-01-01"
 
 # 保留变量名，值在 Dashboard 中配置
 [vars]
-DOMAIN = ""
+DOMAIN = "tgbed.1356666.xyz"
 USERNAME = ""
 PASSWORD = ""
 ENABLE_AUTH = "true"
@@ -14,5 +14,5 @@ CHUNK_SIZE = "5242880"
 
 [[d1_databases]]
 binding = "DATABASE"
-database_name = "imgbed"
-database_id = "b3afe13f-d094-4bd3-a987-58ae918128e9"
+database_name = "tgbed"
+database_id = "e21849e1-c453-4e1c-82f2-7d514cd57b73"
