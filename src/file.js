@@ -12,11 +12,13 @@ export async function handleFileRequest(request, config) {
   const url = request.url;
 
   try {
+    // 从缓存获取
     const cachedResponse = await getFromCache(url);
     if (cachedResponse) {
       return cachedResponse;
     }
 
+    // 从数据库查询
     const file = await getFileByUrl(config.database, url);
     if (!file) {
       return new Response('文件不存在', { 
@@ -25,18 +27,14 @@ export async function handleFileRequest(request, config) {
       });
     }
 
-    // 调试日志
-    console.log('[DEBUG] fileId:', file.fileId);
-    console.log('[DEBUG] Token exists:', !!config.tgBotToken);
-    const getFileUrl = `${TELEGRAM_API}${config.tgBotToken}/getFile?file_id=${file.fileId}`;
-    console.log('[DEBUG] getFile URL:', getFileUrl.replace(config.tgBotToken, '***'));
-
-    const tgResponse = await fetch(getFileUrl);
+    // 获取Telegram文件路径
+    const tgResponse = await fetch(
+      `${TELEGRAM_API}${config.tgBotToken}/getFile?file_id=${file.fileId}`
+    );
 
     if (!tgResponse.ok) {
       const errorText = await tgResponse.text();
-      console.error(`[Telegram API Error] ${tgResponse.status}: ${errorText}`);
-      return new Response(`获取文件失败: Telegram API 返回 ${tgResponse.status}`, { 
+      return new Response(`获取文件失败: ${errorText}`, { 
         status: 500,
         headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
       });
@@ -46,19 +44,18 @@ export async function handleFileRequest(request, config) {
     const filePath = tgData.result?.file_path;
 
     if (!filePath) {
-      console.error(`[Invalid Path] No file_path for ${file.fileId}`);
       return new Response('文件路径无效', { 
         status: 404,
         headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
       });
     }
 
+    // 下载文件
     const fileUrl = `${TELEGRAM_API}file/bot${config.tgBotToken}/${filePath}`;
     const fileResponse = await fetch(fileUrl);
 
     if (!fileResponse.ok) {
-      console.error(`[Download Error] ${fileResponse.status}: ${fileUrl}`);
-      return new Response(`下载文件失败: Telegram 返回 ${fileResponse.status}`, { 
+      return new Response('下载文件失败', { 
         status: 500,
         headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
       });
@@ -78,7 +75,6 @@ export async function handleFileRequest(request, config) {
     return response;
 
   } catch (error) {
-    console.error(`[File Error] ${error.message} for ${url}`);
     return new Response('服务器内部错误', { 
       status: 500,
       headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
