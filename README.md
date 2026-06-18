@@ -241,6 +241,9 @@ CREATE TABLE IF NOT EXISTS files (
 
 ---
 
+## 维护与改进
+本项目基于 [0-RTT/JSimages](https://github.com/0-RTT/JSimages) 改进，由 [chnbsdan](https://github.com/chnbsdan) 持续维护和功能增强。
+
 ## 🤝 参与贡献
 
 1. Fork 本仓库
