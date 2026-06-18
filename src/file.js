@@ -25,9 +25,13 @@ export async function handleFileRequest(request, config) {
       });
     }
 
-    const tgResponse = await fetch(
-      `${TELEGRAM_API}${config.tgBotToken}/getFile?file_id=${file.fileId}`
-    );
+    // 调试日志
+    console.log('[DEBUG] fileId:', file.fileId);
+    console.log('[DEBUG] Token exists:', !!config.tgBotToken);
+    const getFileUrl = `${TELEGRAM_API}${config.tgBotToken}/getFile?file_id=${file.fileId}`;
+    console.log('[DEBUG] getFile URL:', getFileUrl.replace(config.tgBotToken, '***'));
+
+    const tgResponse = await fetch(getFileUrl);
 
     if (!tgResponse.ok) {
       const errorText = await tgResponse.text();
