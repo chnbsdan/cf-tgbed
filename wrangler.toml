@@ -2,7 +2,6 @@ name = "tg-file-host"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
-# 保留变量名，值在 Dashboard 中配置
 [vars]
 DOMAIN = "tgbed.1356666.xyz"
 USERNAME = "bsdan"
@@ -11,6 +10,8 @@ ENABLE_AUTH = "true"
 COOKIE = "7"
 MAX_SIZE_MB = "20"
 CHUNK_SIZE = "5242880"
+TG_BOT_TOKEN = "8409044291:AAFgBdOye9nIFkTBkguo_QMHP4tq4XiP6gY"
+TG_CHAT_ID = "-10022799029130"
 
 [[d1_databases]]
 binding = "DATABASE"
