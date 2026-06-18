@@ -47,29 +47,18 @@ export async function uploadToTelegram(file, config) {
   const result = data.result;
   const messageId = result?.message_id;
   
-  // ✅ 采用 CF-tgfile 的稳定逻辑：优先判断是否为图片
-  let fileId = null;
-  if (result?.photo) {
-    // 如果是图片，取最大尺寸的 file_id
-    fileId = result.photo[result.photo.length - 1].file_id;
-  } else {
-    // 否则从文档、视频、音频中获取
-    fileId = result?.document?.file_id ||
-             result?.video?.file_id ||
-             result?.audio?.file_id;
-  }
-
-  if (!fileId) {
-    console.error('无法提取 fileId，完整响应:', JSON.stringify(result));
-    throw new Error('未获取到文件ID');
-  }
+  // 与原版 CF-tgfile 完全一致：优先 document，再 video/audio，最后 photo
+  const fileId = result?.document?.file_id ||
+                 result?.video?.file_id ||
+                 result?.audio?.file_id ||
+                 (result?.photo && result.photo[result.photo.length-1]?.file_id);
                  
+  if (!fileId) throw new Error('未获取到文件ID');
   if (!messageId) throw new Error('未获取到消息ID');
 
   const url = generateFileUrl(config.domain, ext);
   const timestamp = new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString();
 
-  // 保存到数据库
   await saveFile(config.database, {
     url,
     fileId,
