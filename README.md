@@ -1,9 +1,10 @@
 # CF-TGBed
+## 基于 Cloudflare Workers + D1 数据库 + Telegram 频道 + R2 存储的独立图床与文件托管系统。
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![JavaScript](https://img.shields.io/badge/JavaScript-100%25-yellow.svg)](https://www.javascript.com/)
 
-基于 Cloudflare Workers + D1 数据库 + Telegram 频道 + R2 存储的独立图床与文件托管系统。
+
 
 ## 📖 项目简介
 
@@ -87,8 +88,8 @@
 
 | 绑定类型 | 变量名 | 说明 |
 |----------|--------|------|
-| D1 Database | `DATABASE` | 绑定创建的 D1 数据库 |
-| R2 Bucket | `R2_BUCKET` | 绑定创建的 R2 存储桶（可选） |
+| D1 Database | `DATABASE` | 绑定创建的 D1 数据库 ,自已取的名字|
+| R2 Bucket | `R2_BUCKET` | 绑定创建的 R2 存储桶（可选），自已取的名字 |
 
 ### 5. 配置环境变量
 
@@ -101,11 +102,11 @@
 | `PASSWORD` | 加密 | 管理员密码 | ✅ |
 | `TG_BOT_TOKEN` | 加密 | Telegram Bot Token | ✅ |
 | `TG_CHAT_ID` | 加密 | Telegram 频道 ID（格式：`-10*****062333`） | ✅ |
-| `ENABLE_AUTH` | 纯文本 | 是否启用登录认证（`true`/`false`） | ❌ |
+| `ENABLE_AUTH` | 纯文本 | 是否启用登录认证（`true`/`false`）,若用用户名与密码登录则加变量值为true | ❌ |
 | `COOKIE` | 纯文本 | 登录 Cookie 有效期（天），默认 `7` | ❌ |
 | `MAX_SIZE_MB` | 纯文本 | 单文件最大大小（MB），默认 `20` | ❌ |
-| `ENABLE_R2_FALLBACK` | 纯文本 | 启用 R2 备用存储（`true`/`false`） | ❌ |
-| `R2_PUBLIC_URL` | 纯文本 | R2 公开域名（留空则使用主域名） | ❌ |
+| `ENABLE_R2_FALLBACK` | 纯文本 | 启用 R2 备用存储（`true`/`false`），若使用R2则加变量值为true | ❌ |
+| `R2_PUBLIC_URL` | 纯文本 | R2 公开域名（留空则使用主域名），这项不需要绑定变量 | ❌ |
 
 ### 6. 部署代码
 
