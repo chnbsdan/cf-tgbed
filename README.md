@@ -111,7 +111,7 @@
 ### 6. 部署代码
 
 1. 进入 Worker 的编辑页面
-2. 将 `[_worker.js](https://github.com/chnbsdan/cf-tgbed/blob/main/_worker.js)` 的完整代码复制粘贴到编辑器中
+2. 将 [_worker.js](https://github.com/chnbsdan/cf-tgbed/blob/main/_worker.js) 的完整代码复制粘贴到编辑器中
 3. 点击 **保存并部署**
 
 ### 7. 绑定域名（可选）
