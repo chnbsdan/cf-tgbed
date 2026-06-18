@@ -47,35 +47,20 @@ export async function uploadToTelegram(file, config) {
   const result = data.result;
   const messageId = result?.message_id;
   
-  // ============================================================
-  // ✅ 方案二：优先提取 photo，再提取 document
-  // ============================================================
+  // ✅ 采用 CF-tgfile 的稳定逻辑：优先判断是否为图片
   let fileId = null;
-  
-  // 1. 优先提取 photo（图片）
-  if (result?.photo && result.photo.length > 0) {
+  if (result?.photo) {
+    // 如果是图片，取最大尺寸的 file_id
     fileId = result.photo[result.photo.length - 1].file_id;
-    console.log(`[Upload] Extracted photo fileId: ${fileId.substring(0, 30)}...`);
-  } 
-  // 2. 其次提取 document
-  else if (result?.document) {
-    fileId = result.document.file_id;
-    console.log(`[Upload] Extracted document fileId: ${fileId.substring(0, 30)}...`);
-  } 
-  // 3. 提取 video
-  else if (result?.video) {
-    fileId = result.video.file_id;
-    console.log(`[Upload] Extracted video fileId: ${fileId.substring(0, 30)}...`);
-  } 
-  // 4. 提取 audio
-  else if (result?.audio) {
-    fileId = result.audio.file_id;
-    console.log(`[Upload] Extracted audio fileId: ${fileId.substring(0, 30)}...`);
+  } else {
+    // 否则从文档、视频、音频中获取
+    fileId = result?.document?.file_id ||
+             result?.video?.file_id ||
+             result?.audio?.file_id;
   }
-  
-  // 调试日志：如果都提取不到，打印完整 result
+
   if (!fileId) {
-    console.error('[Upload] Failed to extract fileId from result:', JSON.stringify(result, null, 2));
+    console.error('无法提取 fileId，完整响应:', JSON.stringify(result));
     throw new Error('未获取到文件ID');
   }
                  
