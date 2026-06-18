@@ -4,6 +4,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![JavaScript](https://img.shields.io/badge/JavaScript-100%25-yellow.svg)](https://www.javascript.com/)
 
+> **Language**: [中文](./README.md) | [English](./README.EN.md)
 
 
 ## 📖 项目简介
