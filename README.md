@@ -180,8 +180,8 @@ wrangler deploy
 
 | 变量名 | 说明 | 默认值 |
 |--------|------|--------|
-| `GITHUB_TOKEN` | GitHub Personal Access Token | - |
-| `GITHUB_REPO` | 仓库名（格式：`username/repo`） | - |
+| `GITHUB_TOKEN` | GitHub Personal Access Token | 变量要用密钥不要用文本|
+| `GITHUB_REPO` | 仓库名（格式：`github名称/项目仓库名`） | chnbsdan/cf-tgbed |
 | `GITHUB_BRANCH` | 分支名 | `main` |
 | `GITHUB_PATH` | 存储路径 | `images` |
 
