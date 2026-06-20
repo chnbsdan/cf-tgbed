@@ -1,19 +1,94 @@
-name = "tg-file-host"
+# ============================================================
+# Cloudflare Workers 配置文件
+# 项目: CF-TGBed - 多后端图床服务
+# ============================================================
+
+name = "cf-tgbed"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 
+# ============================================================
+# 环境变量（开发环境）
+# ============================================================
 [vars]
-DOMAIN = "tgbed.1356666.xyz"
-USERNAME = "bsdan"
-PASSWORD = "123456"
+# 必填 - 域名配置
+DOMAIN = "img.example.com"
+
+# 必填 - Telegram 配置
+TG_BOT_TOKEN = "123456:ABC-DEF-GHI-JKL-MNO"
+TG_CHAT_ID = "-1001234567890"
+
+# 认证配置
+USERNAME = "admin"
+PASSWORD = "your-password"
 ENABLE_AUTH = "true"
 COOKIE = "7"
-MAX_SIZE_MB = "20"
-CHUNK_SIZE = "5242880"
-TG_BOT_TOKEN = ""
-TG_CHAT_ID = ""
 
+# 文件限制
+MAX_SIZE_MB = "20"
+
+# R2 配置（可选）
+ENABLE_R2_FALLBACK = "false"
+
+# GitHub 配置（可选）
+GITHUB_TOKEN = "ghp_xxxxxxxxxxxx"
+GITHUB_REPO = "username/repo"
+GITHUB_BRANCH = "main"
+GITHUB_PATH = "images"
+
+# ============================================================
+# D1 数据库绑定
+# ============================================================
 [[d1_databases]]
 binding = "DATABASE"
-database_name = "tgbed"
-database_id = "e21849e1-c453-4e1c-82f2-7d514cd57b73"
+database_name = "cf-tgbed-db"
+database_id = "your-database-id"
+
+# ============================================================
+# R2 存储绑定（可选）
+# ============================================================
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "cf-tgbed-images"
+
+# ============================================================
+# 生产环境配置（覆盖开发环境）
+# ============================================================
+[env.production]
+vars = { 
+  DOMAIN = "img.your-domain.com",
+  TG_BOT_TOKEN = "prod-token",
+  TG_CHAT_ID = "-1009876543210",
+  USERNAME = "admin",
+  PASSWORD = "prod-password",
+  ENABLE_AUTH = "true",
+  COOKIE = "7",
+  MAX_SIZE_MB = "20",
+  ENABLE_R2_FALLBACK = "true",
+  GITHUB_TOKEN = "ghp_prod_xxx",
+  GITHUB_REPO = "username/prod-repo",
+  GITHUB_BRANCH = "main",
+  GITHUB_PATH = "images"
+}
+
+[[env.production.d1_databases]]
+binding = "DATABASE"
+database_name = "cf-tgbed-db"
+database_id = "your-production-database-id"
+
+[[env.production.r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "cf-tgbed-images-prod"
+
+# ============================================================
+# 日志和监控
+# ============================================================
+[logpush]
+enabled = true
+
+# ============================================================
+# 资源限制
+# ============================================================
+[limits]
+cpu_ms = 50
