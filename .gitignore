@@ -1,0 +1,22 @@
+# Cloudflare
+.wrangler/
+.dev.vars
+*.toml.local
+
+# Node
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+Desktop.ini
