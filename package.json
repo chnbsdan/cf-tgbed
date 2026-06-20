@@ -1,27 +1,53 @@
 {
-  "name": "tg-file-host",
+  "name": "cf-tgbed",
   "version": "2.0.0",
-  "description": "Telegram文件托管平台 - Cloudflare Workers",
+  "description": "基于 Cloudflare Workers 的多后端图床服务，支持 Telegram / R2 / GitHub 存储",
   "main": "src/index.js",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "vitest",
-    "lint": "eslint src/**/*.js",
-    "format": "prettier --write src/**/*.js"
+    "deploy:prod": "wrangler deploy --env production",
+    "preview": "wrangler preview",
+    "tail": "wrangler tail",
+    "d1:create": "wrangler d1 create cf-tgbed-db",
+    "d1:execute": "wrangler d1 execute cf-tgbed-db --file=./migrations/001_init.sql",
+    "d1:console": "wrangler d1 execute cf-tgbed-db --command",
+    "r2:create": "wrangler r2 bucket create cf-tgbed-images",
+    "r2:list": "wrangler r2 bucket list",
+    "format": "prettier --write src/**/*.js",
+    "lint": "eslint src/**/*.js"
   },
   "keywords": [
-    "telegram",
-    "file-host",
-    "cloudflare-workers",
-    "image-hosting"
+    "cloudflare",
+    "workers",
+    "telegraph",
+    "image-hosting",
+    "telegram-bot",
+    "r2-storage",
+    "github-storage",
+    "图床",
+    "cdn"
   ],
-  "author": "Chnbsdan",
+  "author": {
+    "name": "Chnbsdan",
+    "email": "your-email@example.com",
+    "url": "https://github.com/chnbsdan"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chnbsdan/CF-tgbed"
+  },
+  "homepage": "https://github.com/chnbsdan/CF-tgbed#readme",
+  "bugs": {
+    "url": "https://github.com/chnbsdan/CF-tgbed/issues"
+  },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "prettier": "^3.1.1",
-    "vitest": "^1.1.0",
-    "wrangler": "^3.22.0"
+    "wrangler": "^3.0.0",
+    "prettier": "^3.0.0",
+    "eslint": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
