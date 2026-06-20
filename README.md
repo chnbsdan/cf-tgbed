@@ -1,6 +1,8 @@
+<div align="center">
+  
 # CF-TGBed - Cloudflare Workers 图床服务
 
-<div align="center">
+
 
 ![GitHub](https://img.shields.io/badge/Cloudflare-Workers-F38020?style=flat&logo=cloudflare)
 ![GitHub](https://img.shields.io/badge/Telegram-Bot-26A5E4?style=flat&logo=telegram)
