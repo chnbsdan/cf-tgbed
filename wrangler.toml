@@ -17,7 +17,7 @@ DOMAIN = "img.example.com"
 
 # 必填 - Telegram 配置
 TG_BOT_TOKEN = "123456:ABC-DEF-GHI-JKL-MNO"
-TG_CHAT_ID = "-1001234567890"
+TG_CHAT_ID = "-100**********"
 
 # 认证配置
 USERNAME = "admin"
@@ -33,7 +33,7 @@ ENABLE_R2_FALLBACK = "false"
 
 # GitHub 配置（可选）
 GITHUB_TOKEN = "ghp_xxxxxxxxxxxx"
-GITHUB_REPO = "username/repo"
+GITHUB_REPO = "chnbsdan/cf-tgbed"
 GITHUB_BRANCH = "main"
 GITHUB_PATH = "images"
 
