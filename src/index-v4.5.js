@@ -4,9 +4,9 @@
 // 功能: 上传、管理、搜索、批量操作、WebP转换、二维码分享、退出登录
 // 新增: 图片预览支持鼠标滚轮缩放 + 拖拽平移、多视图切换（网格/列表/瀑布流）
 // 新增: 多用户系统（注册、登录、独立空间）
-// Telegram Bot API 官方文件上传限制为 50MB
-// 超过 50MB 的文件无法通过 Telegram 上传，请使用 R2 或 GitHub 存储
-// 可通过环境变量 MAX_SIZE_MB 调整，建议不超过 50
+// Telegram Bot API 官方文件上传限制为 20MB
+// 超过 20MB 的文件无法通过 Telegram 返回链接，请使用 R2 或 GitHub 存储
+// 可通过环境变量 MAX_SIZE_MB 调整，建议不超过 20
 // 大文件（>20MB）使用流式传输，支持 Range 请求，解决视频播放问题
 // 作者: Chnbsdan
 // 版本: 4.5
@@ -3910,7 +3910,7 @@ document.getElementById('storageMode')?.addEventListener('change', function() {
             data.folders.forEach(folder => {
               const option = document.createElement('option');
               option.value = folder.id;
-              option.textContent = folder.name;
+              option.textContent = '📂 ' + folder.name;
               select.appendChild(option);
             });
           }
@@ -4842,7 +4842,7 @@ function generateAdminPage(fileCards, previewModal, qrModal, batchToolbar, userM
   <input type="text" class="search" placeholder="搜索文件..." id="searchInput" style="flex:1;border:none;outline:none;background:transparent;padding:10px 0;font-size:14px;font-family:inherit;">
 </div>
         <select id="folderFilter" style="padding:8px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:rgba(255,255,255,0.5);font-size:14px;outline:none;cursor:pointer;">
-          <option value="">所有文件夹</option>
+          <option value="">📂 所有文件夹</option>
         </select>
       </div>
 
@@ -5527,11 +5527,11 @@ function clearSelection() {
           if (data.success) {
             const select = document.getElementById('folderFilter');
             if (!select) return;
-            select.innerHTML = '<option value="">所有文件夹</option>';
+            select.innerHTML = '<option value="">📂 所有文件夹</option>';
             data.folders.forEach(folder => {
               const option = document.createElement('option');
               option.value = folder.id;
-              option.textContent = folder.name;
+              option.textContent = '📂 ' + folder.name;
               select.appendChild(option);
             });
             
