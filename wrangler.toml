@@ -1,4 +1,4 @@
-name = "tg-file-host"
+name = "cf-tgbed"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
